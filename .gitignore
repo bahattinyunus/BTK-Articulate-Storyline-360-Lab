@@ -1,0 +1,16 @@
+# Articulate Storyline specifics
+*.story_tmp
+*.tmp
+*.lock
+
+# OS generated files
+thumbs.db
+Thumbs.db
+.DS_Store
+
+# Published output (usually not version controlled unless specifically intended for pages)
+/output/
+/published/
+
+# Logs
+*.log
