@@ -1,32 +1,63 @@
-# 04. Tetikleyiciler ve Değişkenler (Triggers & Variables)
+# 04. Tetikleyiciler ve Değişkenler: "Storyline'ın Beyni"
 
-> **"Sihir burada gerçekleşir."**
+> **"Tetikleyiciler 'kas', değişkenler 'beyin'dir. Kası olmayan beyin hareket edemez, beyni olmayan kas ise sadece sallar."**
 
-Storyline'ı bir PowerPoint klonundan, bir yazılım geliştirme ortamına dönüştüren yer burasıdır. Bu modül, programlama mantığının (Logic) görsel arayüzle buluştuğu noktadır.
+Bu modül, Storyline'ı statik bir slayt gösterisinden, gerçek bir **yazılıma** dönüştüren kısımdır. Burası, IF (Eğer), THEN (O zaman), ELSE (Değilse) mantığının görsel olarak kurulduğu yerdir. Bir eğitim tasarımcısı ile bir "Storyline Developer" arasındaki fark burada ortaya çıkar.
 
-## 🎯 Hedefler
-- 3 temel değişken türünü (Text, Number, Boolean) ustaca kullanmak.
-- Koşullu İfadeler (Conditions) ile "Akıllı" senaryolar yazmak.
-- Kullanıcıdan veri toplamak (Data Entry).
+## 🎯 Bu Modülde Neler Öğreneceksiniz?
+1.  **Variable Types:** Text, Number ve Boolean değişkenlerin simyası.
+2.  **Logic & Conditions:** "Akıllı" senaryolar kurmak.
+3.  **Data Loop:** Kullanıcıdan bilgi almak, işlemek ve geri sunmak.
+4.  **Reference:** Değişkenleri ekrana yazdırmak (`%DegiskenAdi%`).
 
-## 🛠️ Teknik Detaylar
+---
+
+## 🛠️ Teknik Derinlik ve Best Practices
 
 ### 1. Değişken Türleri (Kutsal Üçlü)
-- **Text (Metin):** İsim, Notlar, Parola saklamak için.
-    - *Örnek:* `%UserName%` değişkenini kullanıcının girdiği isme eşitlemek.
-- **Number (Sayı):** Skor, Sayaç, İlerleme yüzdesi.
-    - *Örnek:* Her doğru cevapta `Score` değişkenini 10 artır (`Add 10 to Score`).
-- **Boolean (True/False):** Anahtar/Switch.
-    - *Örnek:* `isModuleComplete` değişkeni. Başta `False`'dur. Modül bitince `True` olur.
+Storyline'da sadece 3 tip değişken vardır ama bunlarla dünyayı yönetebilirsiniz.
+- **Text (Metin):** İsimler, notlar, açık uçlu cevaplar.
+    - *Kullanım:* Sertifikaya isim basmak.
+- **Number (Sayı):** Skor, sayaç, sayfa numarası, hak sayısı.
+    - *Kullanım:* "Kalan Hakkınız: 2" gibi geri sayımlar yapmak.
+- **Boolean (True/False):** En kritik tiptir. Bir şeyin yapılıp yapılmadığını takip eder.
+    - *Kullanım:* `isModule1Complete = False`. Modül bitince `True` yap. Menüde Modül 2'nin kilidini bu değişkene bakarak aç.
 
-### 2. Koşullar (Conditions): "Eğer... İse..."
-Tetikleyicilerinize IQ katın.
-- Trigger: `Jump to slide [Success Slide]`
-- When: `User clicks [Submit]`
-- **Condition:** `Use if [Score] is greater than or equal to 80`.
-*(Eğer puan 80'den büyükse başarı sayfasına git, yoksa hata sayfasına git.)*
+### 2. Koşullar (Conditions): Algoritma Kurmak
+Bir tetikleyiciye (Trigger) "Şart" koşmaktır.
+- **Senaryo:** Kullanıcı "Bitir" butonuna bastı.
+- **Trigger:** Başarı sayfasına git.
+- **Condition:** *EĞER* `Score` değişkeni 70'ten büyükse.
+- **Else (Değilse):** Aynı butonun altına ikinci bir trigger ekleyerek (`Score` < 70) başarısız sayfasına yönlendirin.
+*Dikkat:* Trigger sırası (Order) hayati önem taşır. Storyline triggerları yukarıdan aşağıya işler. Jump (Git) triggerı en sonda olmalıdır, çünkü gidince diğer triggerlar çalışmaz.
 
-### 🧪 Laboratuvar Görevi (Gamification)
-1. "İsminiz Nedir?" diye soran bir Data Entry alanı yapın ve bunu bir değişkende saklayın.
-2. Sonraki slaytta "Merhaba [İsim], hoş geldin!" yazdırın.
-3. Basit bir sayaç yapın: Bir butona her basıldığında ekrandaki sayıyı 1 artıran mekanizmayı kurun.
+### 3. Değişken Referansı (References)
+Bir değişkenin içindeki değeri ekranda göstermek için `%` işaretleri arasına adını yazın.
+- Metin kutusuna: `Tebrikler %UserName%, toplam puanınız: %UserScore%.`
+- Storyline bunu yayınlandığında (Publish) otomatik olarak "Tebrikler Ahmet, toplam puanınız: 90." şekline çevirir.
+
+---
+
+## 🚫 Sık Yapılan Hatalar (Çukurlar)
+
+| Hata | Sonuç | Çözüm |
+| :--- | :--- | :--- |
+| **Sonsuz Değişken** | Her slayt için yeni değişken yaratmak. | Değişkenleri global düşünün. `Score` tek bir tanedir, her slayt için `Score1`, `Score2` yapmayın. |
+| **Trigger Sıralaması** | Hesaplama yapmadan sayfadan gitmek. | "Jump to slide" triggerını her zaman listenin EN ALTINA koyun. Önce hesapla, sonra git. |
+| **Case Sensitive** | Referansların çalışmaması. | Değişken adı `Puan` ise `%puan%` çalışmaz. `%Puan%` yazmalısınız. |
+
+---
+
+## 🧪 Laboratuvar Görevi: "Gamified Kilit Sistemi"
+
+1.  **Değişkenler:** `isLevel1Complete` (False), `isLevel2Complete` (False), `PlayerName` (Text) oluşturun.
+2.  **Giriş Ekranı:** Kullanıcı adını girsin ve `PlayerName` değişkenine kaydolsun.
+3.  **Menü Ekranı:**
+    - Level 1 butonu açık.
+    - Level 2 butonu kilitli (State: Disabled).
+4.  **Level 1 Sonu:** Bir butonla `isLevel1Complete` değişkenini `True` yapın.
+5.  **Menüye Dönüş:** Menü slaytına bir trigger ekleyin:
+    - *Action:* Change state of Level 2 Button to Normal.
+    - *When:* Timeline starts (Sayfa açıldığında).
+    - *Condition:* If `isLevel1Complete` is equal to `True`.
+6.  Böylece Level 1 bitmeden Level 2 açılamaz.

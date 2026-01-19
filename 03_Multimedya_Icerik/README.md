@@ -1,34 +1,58 @@
-# 03. Multimedya İçerik (Multimedia Content)
+# 03. Multimedya İçerik: "Hissedilen Deneyimler"
 
-> **"İçerik kraldır, ama sunum vezirdir."**
+> **"Göz görür, kulak duyar, zihin birleştirir. E-öğrenme sadece okumak değildir; çok duyulu (multi-sensory) bir yolculuktur."**
 
-Bu modül, metin tabanlı sıkıcı eğitimlerden kurtulup; ses, video, web objeleri ve karakterlerle zenginleştirilmiş deneyimler tasarlamayı öğretir.
+Storyline'ı güçlü kılan özelliklerden biri, video, ses ve web teknolojilerini sorunsuz bir şekilde harmanlayabilmesidir. Bu modül, statik bir slaytı yaşayan, konuşan ve hareket eden bir deneyime dönüştürmenin yollarını anlatır.
 
-## 🎯 Hedefler
-- Video ve Ses dosyalarını yönetmek ve tetikleyicilerle bağlamak.
-- Timeline (Zaman Çizelgesi) senkronizasyonu.
-- Web Objects ile dış dünyayı içeri almak.
-- Erişilebilirlik (Accessibility) ve Alt Text kullanımı.
+## 🎯 Bu Modülde Neler Öğreneceksiniz?
+1.  **Media Triggers:** Video bittiğinde ne olacağını kodlamak.
+2.  **Cue Points (Senkronizasyon):** Sesi ve yazıyı aynı anda dans ettirmek.
+3.  **Web Objects:** Storyline'ın sınırlarını aşmak (Web sitelerini içeri gömmek).
+4.  **Accessibility (Erişilebilirlik):** Alt Text ve Closed Captions (Altyazı) önemi.
 
-## 🛠️ Teknik Detaylar
+---
 
-### 1. Medya Tetikleyicileri (Media Triggers)
-Video bittiğinde ne olacak? Storyline bunu otomatik yapmaz.
-- **Trigger:** `Change state of Next Button to Normal` (İleri butonunu aktif et)
-- **When:** `Media Completes` (Medya tamamlandığında)
-- **Object:** `Video 1`
-*Bu desen, kullanıcının videoyu izlemeden geçmesini engellemek için standarttır.*
+## 🛠️ Teknik Derinlik ve Best Practices
 
-### 2. Timeline Senkronizasyonu (Cue Points)
-Ses dosyasıyla ekrandaki metinleri eşleştirmek için **Cue Points** (İşaret Noktaları) kullanın.
-- Timeline'da `C` tuşuna basarak işaret koyun.
-- Trigger: `Show [Image 1] when timeline reaches Cue Point 1`.
+### 1. Video Kontrolü ve Tetikleyiciler
+Kullanıcının videoyu sonuna kadar izlemesini (Compliance Training) istiyorsanız, "İleri" butonunu başlangıçta pasif yapmalısınız.
+- **Adım 1:** İleri butonunun durumunu (State) `Disabled` veya `Hidden` yapın.
+- **Adım 2:** Trigger yazın: `Change state of Next Button to Normal` (Normal hale getir).
+- **Adım 3:** When: `Media Completes` (Medya tamamlandığında).
+- **Adım 4:** Object: `Video 1`.
+*Pro Tip:* Videonun üzerine şeffaf bir şekil (Hotspot) koyarak kullanıcının videoyu durdurmasını/tıklamasını engelleyebilirsiniz.
 
-### 3. Web Objects
-Storyline içine canlı web sitesi, PDF veya HTML5 animasyon gömmek için kullanılır.
-- *Dikkat:* Web objeleri "Preview" modunda bazen çalışmaz. Tam testi "Publish" ettikten sonra yapın.
+### 2. Cue Points (Zaman İşaretçileri)
+Timeline üzerinde belirli saniyelere "bayrak dikmek" gibidir.
+- **Nasıl Eklenir?** Timeline oynarken klavyedeki `C` tuşuna her bastığınızda bir Cue Point (1, 2, 3...) eklenir.
+- **Kullanımı:** Metin kutularının giriş animasyonlarını bu noktalara bağlayabilirsiniz. Trigger: `Show [TextBox 1] when Timeline reaches [Cue Point 1]`.
+- Bu teknik, sesi dinleyere manuel senkronizasyon yapmaktan 10 kat daha hızlıdır.
 
-### 🧪 Laboratuvar Görevi
-1. Slayta bir mp4 video ekleyin.
-2. Videonun altına özel bir "Play/Pause" butonu yapın ve trigger ile videoyu kontrol edin.
-3. Videonun üzerine, belirli saniyelerde (Cue Points) beliren bilgi balonucukları ekleyin.
+### 3. Web Objects: "Pencere İçinde Pencere"
+Eğitimin içinden çıkmadan şirketin İK politikasını (PDF) veya canlı bir web sitesini göstermek mümkündür.
+- `Insert > Web Object` diyerek URL yapıştırın.
+- **Dikkat:** Web objeleri her zaman en üst katmandadır (Always on top). Üzerine bir şekil veya buton koyamazsınız. Web objesini kapatmak için farklı bir slayta veya katmana geçmeniz gerekir.
+
+### 4. Accessibility (Erişilebilirlik)
+Modern eğitimin olmazsa olmazı.
+- **Closed Captions:** Storyline'ın kendi altyazı editörü vardır. Videonun/sesin üzerine gelip `Options > Add Captions` diyerek altyazı ekleyebilirsiniz.
+- **Focus Order:** Tab tuşuyla gezen engelli kullanıcılar için nesnelerin okunma sırasını ayarlayın (`Home > Focus Order`).
+
+---
+
+## 🚫 Sık Yapılan Hatalar (Çukurlar)
+
+| Hata | Sonuç | Çözüm |
+| :--- | :--- | :--- |
+| **Ağır Videolar** | Eğitimin geç yüklenmesi. | Videoları Handbrake gibi bir araçla sıkıştırıp yükleyin. |
+| **Senkron Kayması** | Ses ile yazının tutmaması. | Timeline'da sürelerle oynamak yerine Cue Points kullanın. |
+| **Otomatik Video (Autoplay)** | Tarayıcıların videoyu engellemesi. | Modern tarayıcılar (Chrome) sessiz olmayan videoların otomatik başlamasını engeller. Videoya bir "Play" butonu koyun. |
+
+---
+
+## 🧪 Laboratuvar Görevi: "Video Tabanlı Senaryo"
+
+1.  Slayta bir adet MP4 video ekleyin (bir toplantı sahnesi olabilir).
+2.  Video oynarken `C` tuşuyla 3 kritik noktaya (toplantı başı, kavga anı, çözüm anı) Cue Point koyun.
+3.  Bu Cue Point'lerde ekrana "Dikkat!" diyen bir uyarı ikonu çıkartın (Trigger ile).
+4.  Video bittiğinde "Sonraki Adım" butonunu görünür yapın (`Hidden` to `Normal`).

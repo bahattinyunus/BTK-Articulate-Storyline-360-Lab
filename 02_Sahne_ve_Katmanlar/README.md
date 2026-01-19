@@ -1,32 +1,54 @@
-# 02. Sahne ve Katmanlar (Scenes & Layers)
+# 02. Sahne ve Katmanlar: "Derinlik Mühendisliği"
 
-> **"Derinlik, karmaşıklığı yönetmenin anahtarıdır."**
+> **"Acemi tasarımcı yanal düşünür (yeni slayt); usta tasarımcı dikey düşünür (katmanlar)."**
 
-Bu modül, Storyline'ı PowerPoint'ten ayıran en büyük özellik olan **Katman (Layer)** mantığını ve **Slide Master** mimarisini işler.
+Bu modül, Storyline'ın en güçlü silahı olan **Layers (Katmanlar)** ve üretim verimliliğini %500 artıran **Slide Master** yapısını derinlemesine inceler. Articulate Storyline kullanıp da katmanları kullanmıyorsanız, aslında PowerPoint kullanıyorsunuz demektir.
 
-## 🎯 Hedefler
-- Slide Master ile global tasarım şablonları oluşturmak.
-- Katmanlar (Layers) ile tek sayfada çoklu içerik sunmak.
-- Base Layer (Ana Katman) etkileşimlerini yönetmek.
+## 🎯 Bu Modülde Neler Öğreneceksiniz?
+1.  **Slide Master:** Tasarım sistemleri (Design Systems) kurmak.
+2.  **Layer Logic:** Ana sahneyi kirletmeden ek içerik sunmak.
+3.  **Modal Dialogs:** Kullanıcıyı odaklayan etkileşimler tasarlamak.
+4.  **Feedback Masters:** Sıkıcı "Doğru/Yanlış" pop-up'larını sanat eserine dönüştürmek.
 
-## 🛠️ Teknik Detaylar
+---
 
-### 1. Slide Master: "Bir Kere Yap, Her Yerde Kullan"
-Her slayta tek tek logo, başlık, ileri/geri butonu koymak amatörlüktür.
-- **View > Slide Master** menüsünden ana şablonu tasarlayın.
-- "Feedback Master" ile Doğru/Yanlış pop-up'larının tasarımını standartlaştırın.
+## 🛠️ Teknik Derinlik ve Best Practices
 
-### 2. Layers (Katmanlar) Mantığı
-Katmanlar, şeffaf asetat kağıtları gibi ana slaytın üzerine biner.
-- **Show Layer:** Bir tetikleyici ile katmanı gösterirsiniz.
-- **Hide Layer:** Katmandaki bir buton (genelde "X") ile katmanı gizlersiniz.
-- **Layer Properties:** En kritik ayarlar buradadır:
-    - *Prevent user from clicking on the base layer:* Katman açıkken arkadaki butonlara basılmasını engeller (Modal Dialog mantığı).
-    - *Pause timeline of base layer:* Katman açıldığında ana slayttaki videoyu/sesi dondurur.
+### 1. Slide Master: "Tek Merkezden Yönetim"
+`View > Slide Master`
+Her slaytın arkasında çalışan "görünmez el"dir.
+- **Layouts (Düzenler):** "Konu Anlatım Sayfası", "Video Sayfası", "Giriş Sayfası" gibi şablonlar oluşturun. Yeni slayt eklerken "Insert Slide > Basic Layouts" yerine kendi yaptığınız bu düzenleri seçin.
+- **Placeholder (Yer Tutucu):** Master slayt üzerine sadece "Text Box" değil, "Content Placeholder" koyun. Böylece slayt aşamasında oraya ister resim, ister video, ister metin koyabilirsiniz.
 
-### 🧪 Laboratuvar Görevi
-1. **Slide Master**'a gidip kurumsal bir tema (Logo + Renkler) oluşturun.
-2. Ana slayta 3 adet buton koyun (Konu A, Konu B, Konu C).
-3. Her buton için bir **Layer** oluşturun.
-4. Butonlara tıklandığında ilgili katmanı açacak tetikleyicileri yazın.
-5. Katmanlar açıkken ana sahneye tıklanmasını engelleyin.
+### 2. Layers (Katmanlar): "Odanın İçindeki Odalar"
+Slaytı bir oda gibi düşünün. Katmanlar, o odada ışıkları kapatıp sadece bir köşeye spot ışığı tutmak gibidir.
+- **Base Layer (Temel Katman):** Odanın kendisi.
+- **Layer Properties (Katman Özellikleri):** (Çark Simgesi)
+    - **Hide other slide layers:** Aynı anda sadece bir katman açık olsun istiyorsanız bunu seçin (Tab etkileşimleri için ideal).
+    - **Prevent user from clicking on the base layer:** *EN ÖNEMLİ ÖZELLİK.* Bunu seçerseniz, katman açıkken kullanıcı arkadaki butonlara tıklayamaz. Kullanıcıyı katmandaki içeriği okumaya ve oradaki "Kapat" butonuna basmaya zorlarsınız.
+    - **Pause timeline of base layer:** Video izlerken bir soru sorduğunuzda, videonun arkada akıp gitmesini istemiyorsanız bunu seçin.
+
+### 3. Feedback Master
+Storyline'ın varsayılan "Yeşil Tik / Kırmızı Çarpı" geri bildirimleri çok demodedir.
+- `View > Feedback Master` bölümüne giderek kendi modern, şık "Tebrikler" ve "Tekrar Dene" pencerelerinizi tasarlayın. Bu tasarım tüm quiz sorularına otomatik uygulanır.
+
+---
+
+## 🚫 Sık Yapılan Hatalar (Çukurlar)
+
+| Hata | Sonuç | Çözüm |
+| :--- | :--- | :--- |
+| **Manuel Kopyalama** | Her slayt için logoyu copy-paste yapmak. | Logoyu Slide Master'a koyun. |
+| **Katman Karmasası** | Bir katman açılınca diğerinin kapanmaması. | Layer Properties'den "Hide other slide layers"ı işaretleyin. |
+| **Görünmez Kilit** | Katman açıkken arkadaki butonun çalışması. | "Prevent user from clicking on the base layer" kutusunu işaretleyin. |
+
+---
+
+## 🧪 Laboratuvar Görevi: "İnteraktif Sekmeler (Tabs)"
+
+1.  Bir Slide Master düzeni oluşturun: Solda menü, sağda içerik alanı.
+2.  Normal slayta dönün ve 4 adet buton ekleyin: (Vizyon, Misyon, Değerler, Ekip).
+3.  Sağ alt panelden 4 adet **Layer** oluşturun ve isimlerini butonlarla eşleyin.
+4.  Her katmana ilgili metni yazın.
+5.  **Trigger Yazın:** "Show Layer [Vizyon] when User Clicks [Btn_Vizyon]".
+6.  **Kritik Ayar:** Her katmanın özelliklerine girip "Hide other slide layers" seçeneğini aktif edin. Böylece Vizyon'a basınca Misyon kapanır.
